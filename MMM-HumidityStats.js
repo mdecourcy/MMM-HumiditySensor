@@ -1,4 +1,4 @@
-Module.register("MMM-HumidityStats",{
+Module.register("humidity",{
     //Defaults
     defaults: {
       ClientID: "TEST", // No change
@@ -32,7 +32,7 @@ Module.register("MMM-HumidityStats",{
         xhr.send();
       this.startUpdateLoop()
     },
-    // Load Styles
+    // Load Style
     getStyles: function(){
       return [
           'style.css',
@@ -57,7 +57,7 @@ Module.register("MMM-HumidityStats",{
            }};
         
         xhr.send();
-        var data = JSON.parse(this.xhr)
+        var data = JSON.parse(xhr.responseText)
         self.config.StatsResult = data
         self.generateStatsText()
         
@@ -80,7 +80,7 @@ Module.register("MMM-HumidityStats",{
         this.getStats();
     },
   
-    // loop the update to change Solo, Duo, Suqad or total
+
     startUpdateLoop: function(){
       setInterval(() => {
         this.updateStats()
