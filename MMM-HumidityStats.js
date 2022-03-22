@@ -15,7 +15,7 @@ Module.register("humidity",{
     },
     // LOADING API
     start: function(){
-        var url = "https://eknqepv86f.execute-api.us-east-1.amazonaws.com/database/timestream";
+        var url = "REDACTED";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
@@ -42,7 +42,7 @@ Module.register("humidity",{
     // receiving stats from api
   
     getStats: function(){
-        var url = "https://eknqepv86f.execute-api.us-east-1.amazonaws.com/database/timestream";
+        var url = "REDACTED";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
