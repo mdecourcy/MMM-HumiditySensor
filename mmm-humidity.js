@@ -1,10 +1,10 @@
-Module.register("MMM-HumidityStats",{
+Module.register("mmm-humidity",{
     //Defaults
     defaults: {
-      ClientID: "TEST", // No change
-      Stats: "total", // no change
-      StatsResult: "EMPTY", // no change
-      StatsText: "Loading", // no change
+      ClientID: "", 
+      Stats: "", 
+      StatsResult: "", 
+      StatsText: "Loading",
       UpdateInterval: 30 // In seconds
     },
     // define scripts
@@ -29,7 +29,7 @@ Module.register("MMM-HumidityStats",{
               console.log(xhr.responseText);
            }};
         
-        xhr.send();
+      xhr.send();
       this.startUpdateLoop()
     },
     // Load Styles
@@ -49,29 +49,28 @@ Module.register("MMM-HumidityStats",{
         
         xhr.setRequestHeader("moduleid", "1002");
         xhr.setRequestHeader("measurename", "humidity");
-        
+        var self = this
+ 
         xhr.onreadystatechange = function () {
            if (xhr.readyState === 4) {
               console.log(xhr.status);
               console.log(xhr.responseText);
+		self.config.StatsResult = JSON.parse(xhr.responseText)
+		self.generateStatsText()
            }};
-        
         xhr.send();
-        var data = JSON.parse(this.xhr)
-        self.config.StatsResult = data
-        self.generateStatsText()
+	console.log("Stats result: " + JSON.stringify(this.config.statsResult))
         
     },
   
     // The displayed text
-  
     generateStatsText: function() {
       if(this.config.StatsResult != "EMPTY"){
         var stats = this.config.StatsResult
-        this.config.StatsText = "Greenhouse: " + stats.greenhouseID + "Time: " + stats.time + "Value: " + stats.measure_value
+        this.config.StatsText = `Greenhouse ID: ${stats.greenhouseID} Time: ${stats.time} Value: ${stats.measure_value}`
         this.updateDom()
         }
-        console.log(this.config.StatsResult)
+        
     },
   
     // Change Stats
@@ -80,7 +79,6 @@ Module.register("MMM-HumidityStats",{
         this.getStats();
     },
   
-    // loop the update to change Solo, Duo, Suqad or total
     startUpdateLoop: function(){
       setInterval(() => {
         this.updateStats()
@@ -94,7 +92,7 @@ Module.register("MMM-HumidityStats",{
       title.innerHTML = "Greenhouse Stats"
       var body = document.createElement("body");
       var div = document.createElement("div");
-      var stats = document.createElement("P");
+      var stats = document.createElement("p");
       wrapper.appendChild(body)
       body.appendChild(div)
       div.appendChild(stats)
