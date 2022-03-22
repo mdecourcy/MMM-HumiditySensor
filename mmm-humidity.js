@@ -1,4 +1,8 @@
+<<<<<<< HEAD:mmm-humidity.js
 Module.register("mmm-humidity",{
+=======
+Module.register("humidity",{
+>>>>>>> 2242321e66447f9ca666c76e02f53cab4d7ca613:MMM-HumidityStats.js
     //Defaults
     defaults: {
       ClientID: "", 
@@ -15,7 +19,7 @@ Module.register("mmm-humidity",{
     },
     // LOADING API
     start: function(){
-        var url = "https://eknqepv86f.execute-api.us-east-1.amazonaws.com/database/timestream";
+        var url = "REDACTED";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
@@ -32,7 +36,7 @@ Module.register("mmm-humidity",{
       xhr.send();
       this.startUpdateLoop()
     },
-    // Load Styles
+    // Load Style
     getStyles: function(){
       return [
           'style.css',
@@ -42,7 +46,7 @@ Module.register("mmm-humidity",{
     // receiving stats from api
   
     getStats: function(){
-        var url = "https://eknqepv86f.execute-api.us-east-1.amazonaws.com/database/timestream";
+        var url = "REDACTED";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
@@ -59,7 +63,13 @@ Module.register("mmm-humidity",{
 		self.generateStatsText()
            }};
         xhr.send();
+<<<<<<< HEAD:mmm-humidity.js
 	console.log("Stats result: " + JSON.stringify(this.config.statsResult))
+=======
+        var data = JSON.parse(xhr.responseText)
+        self.config.StatsResult = data
+        self.generateStatsText()
+>>>>>>> 2242321e66447f9ca666c76e02f53cab4d7ca613:MMM-HumidityStats.js
         
     },
   
@@ -79,6 +89,10 @@ Module.register("mmm-humidity",{
         this.getStats();
     },
   
+<<<<<<< HEAD:mmm-humidity.js
+=======
+
+>>>>>>> 2242321e66447f9ca666c76e02f53cab4d7ca613:MMM-HumidityStats.js
     startUpdateLoop: function(){
       setInterval(() => {
         this.updateStats()
