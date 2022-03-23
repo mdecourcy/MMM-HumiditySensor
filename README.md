@@ -1,5 +1,5 @@
 # MMM-HumiditySensor
-quick and dirty MagicMirror² module to get stats from adia greenhouse API
+Quick and dirty MagicMirror² module to get stats from adia greenhouse API
 
 
 From their docs:
